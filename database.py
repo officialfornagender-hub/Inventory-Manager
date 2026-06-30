@@ -11,8 +11,13 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive",
 ]
 
-creds = Credentials.from_service_account_file(
-    "inventory-manager.json",
+import os
+import json
+
+service_account = json.loads(os.environ["GOOGLE_SERVICE_ACCOUNT"])
+
+creds = Credentials.from_service_account_info(
+    service_account,
     scopes=SCOPES,
 )
 
