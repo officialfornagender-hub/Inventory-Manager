@@ -6,16 +6,16 @@ from pages.login_page import show_login
 
 
 def main(page: ft.Page):
-    # Page Settings
+    # Window Settings
     page.title = "Retail Inventory Manager"
     page.theme_mode = ft.ThemeMode.LIGHT
 
-    # Desktop window size only
-    if not page.web:
+    # These work only on desktop, so avoid them on web
+    if page.web is False:
         page.window.width = 450
         page.window.height = 850
 
-    # Update Product Status in Google Sheet
+    # Update Product Status
     update_all_status()
 
     # Open Login Page
@@ -25,5 +25,6 @@ def main(page: ft.Page):
 ft.app(
     target=main,
     view=ft.AppView.WEB_BROWSER,
-    port=int(os.environ.get("PORT", 8080)),
+    host="0.0.0.0",
+    port=int(os.environ.get("PORT", 10000)),
 )
